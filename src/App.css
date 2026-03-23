@@ -1,0 +1,310 @@
+body {
+  background: #0d0d0d;
+  color: #fff;
+}
+
+.app {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #1db954;
+}
+
+.search-box {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.search-box input {
+  padding: 10px 15px;
+  width: 280px;
+  border-radius: 25px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+  outline: none;
+  font-size: 14px;
+}
+
+.search-box input::placeholder {
+  color: #888;
+}
+
+.search-box input:focus {
+  border: 1px solid #1db954;
+}
+
+.search-box button {
+  padding: 10px 18px;
+  border-radius: 25px;
+  border: none;
+  background: #1db954;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.search-box button:hover {
+  background: #17a74a;
+}
+
+.artist-title {
+  text-align: center;
+  margin: 30px 0 25px;
+  font-size: 22px;
+  color: #ccc;
+}
+
+.artist-title span {
+  color: #1db954;
+  font-weight: 600;
+}
+
+.songs {
+  /* border: 2px solid blue; */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  /* border: 1px solid red; */
+  background: #181818;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.card:hover {
+  background: #242424;
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.info {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.info h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.info p {
+  font-size: 13px;
+  color: #aaa;
+}
+
+.info small {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.play-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #1db954;
+  background: transparent;
+  color: #1db954;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-top: auto;
+  cursor: pointer;
+}
+
+.play-btn:hover {
+  background: #1db954;
+  color: #000;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input {
+  padding: 10px 40px;
+  width: 280px;
+  border-radius: 25px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+  outline: none;
+}
+.search-icon {
+  position: absolute;
+  left: 15px;
+  color: #888;
+  font-size: 14px;
+}
+
+.clear-icon {
+  /* border: 1px solid red; */
+  position: absolute;
+  right: 15px;
+  color: #888;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.clear-icon:hover {
+  color: #1db954;
+}
+
+.no-results {
+  text-align: center;
+  margin-top: 40px;
+  color: #aaa;
+  font-size: 20px;
+}
+
+@media all and (max-width: 768px) {
+  h1 {
+    font-size: 24px;
+  }
+  .search-box {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .input-wrapper input {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .search-box button {
+    width: 150px;
+  }
+  .artist-title {
+    font-size: 20px;
+    margin: 25px 0;
+  }
+
+  .songs {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 18px;
+  }
+
+  .card img {
+    height: 160px;
+  }
+}
+
+@media all and (max-width: 576px) {
+  .app {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .search-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .input-wrapper {
+    width: 100%;
+    max-width: 320px;
+    position: relative;
+  }
+
+  .input-wrapper input {
+    width: 100%;
+    padding: 10px 40px;
+    font-size: 14px;
+    border-radius: 25px;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 15px;
+    font-size: 14px;
+  }
+
+  .clear-icon {
+    position: absolute;
+    right: 15px;
+    font-size: 16px;
+  }
+
+  .search-box button {
+    width: 160px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 25px;
+  }
+
+  .artist-title {
+    font-size: 18px;
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  .songs {
+    gap: 14px;
+  }
+
+  .card {
+    padding: 10px;
+  }
+  .card img {
+    height: 160px;
+  }
+
+  .info h3 {
+    font-size: 15px;
+  }
+
+  .info p {
+    font-size: 12px;
+  }
+
+  .info small {
+    font-size: 11px;
+  }
+
+  .play-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+}
