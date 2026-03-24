@@ -3,14 +3,14 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [songs, setSongs] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(null);
-  const [artistName, setArtistName] = useState("");
-  const [searched, setSearched] = useState(false);
+  const [songs, setSongs] = useState([]); //song list
+  const [currentIndex, setCurrentIndex] = useState(null); //index
+  const [artistName, setArtistName] = useState(""); //artist name
+  const [searched, setSearched] = useState(false); //search
 
   const audioRef = useRef(null);
 
-  // ✅ Cleanup useEffect — stops audio when leaving page
+  //  Cleanup useEffect — stops audio when leaving page
   useEffect(() => {
     return () => {
       if (audioRef.current) {
@@ -49,21 +49,17 @@ function App() {
         },
       });
 
+      // console.log(res); // full response
+      // console.log(res.data); // Only data
+      // console.log(res.data.results); //song array
+
       const results = res.data.results || [];
 
       setSongs(results);
-      setSearched(true);
+      setSearched(true); //search over
 
       // Close loading popup
       Swal.close();
-
-      // If no results
-      if (results.length === 0) {
-        Swal.fire({
-          icon: "info",
-          title: "No results found",
-        });
-      }
     } catch (error) {
       console.error("Error fetching songs:", error);
 
@@ -90,11 +86,8 @@ function App() {
       audioRef.current.pause();
     }
 
-    const newAudio = new Audio(url);
-    newAudio.play();
-
-    audioRef.current = newAudio;
-    setCurrentIndex(index);
+    audioRef.current = new Audio(url);
+    audioRef.current.play();
   };
 
   const clearSearch = () => {
@@ -125,12 +118,14 @@ function App() {
             value={artistName}
             onChange={(e) => setArtistName(e.target.value)}
             onKeyDown={(e) => {
+              // console.log(e)
               if (e.key === "Enter" && artistName.trim() !== "") {
                 getSongs(artistName);
               }
             }}
           />
 
+          {/* cross mark */}
           {artistName && (
             <i
               className="fa-solid fa-xmark clear-icon"
@@ -139,6 +134,7 @@ function App() {
           )}
         </div>
 
+        {/* button */}
         <button
           onClick={() => {
             if (artistName.trim() !== "") {

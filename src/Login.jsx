@@ -1,21 +1,26 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
 
-  const [user, setUser] = useState({
-    name: "",
-    password: "",
-  });
+  // Create refs
+  const nameRef = useRef(null);
+  const passwordRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("Submitted User:", user);
+    // Get values from refs
+    const user = {
+      name: nameRef.current.value,
+      password: passwordRef.current.value,
+    };
 
-    // Navigate to App page
+    // console.log(user);
+
+    // Navigate to songs page
     navigate("/songs");
   };
 
@@ -28,22 +33,16 @@ const Login = () => {
           <label>Username</label>
           <input
             type="text"
-            value={user.name}
             placeholder="Enter Username"
-            onChange={(e) =>
-              setUser({ ...user, name: e.target.value })
-            }
+            ref={nameRef}
             required
           />
 
           <label>Password</label>
           <input
             type="password"
-            value={user.password}
-            placeholder="Enter Username"
-            onChange={(e) =>
-              setUser({ ...user, password: e.target.value })
-            }
+            placeholder="Enter Password"
+            ref={passwordRef}
             required
           />
 
