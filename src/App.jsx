@@ -88,6 +88,8 @@ function App() {
 
     audioRef.current = new Audio(url);
     audioRef.current.play();
+
+    setCurrentIndex(index);
   };
 
   const clearSearch = () => {
