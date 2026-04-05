@@ -203,7 +203,7 @@ function App() {
       </div>
 
       {/* Listening Indicator (ADDED) */}
-      {isListening && <p>🎤 Listening...</p>}
+      {isListening && <p> Listening...</p>}
 
       {/* Artist Title */}
       {artistName && songs.length > 0 && (
