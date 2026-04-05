@@ -30,10 +30,10 @@ const Login = () => {
         <form className="login-form" onSubmit={handleSubmit}>
           <h2>Login</h2>
 
-          <label>Username</label>
+          <label>Name</label>
           <input
             type="text"
-            placeholder="Enter Username"
+            placeholder="e.g. suba"
             ref={nameRef}
             required
           />
@@ -41,7 +41,7 @@ const Login = () => {
           <label>Password</label>
           <input
             type="password"
-            placeholder="Enter Password"
+            placeholder="e.g. xxxx"
             ref={passwordRef}
             required
           />
