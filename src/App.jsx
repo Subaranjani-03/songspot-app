@@ -8,6 +8,10 @@ function App() {
   const [artistName, setArtistName] = useState(""); //artist name
   const [searched, setSearched] = useState(false); //search
 
+  // ===== Voice Search State (ADDED) =====
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef(null);
+
   const audioRef = useRef(null);
 
   //  Cleanup useEffect — stops audio when leaving page
@@ -16,8 +20,49 @@ function App() {
       if (audioRef.current) {
         audioRef.current.pause();
       }
+
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
     };
   }, []);
+
+  // ===== Voice Search Function (ADDED) =====
+  const startVoiceSearch = () => {
+    if (!("webkitSpeechRecognition" in window)) {
+      alert("Voice search not supported in this browser");
+      return;
+    }
+
+    const recognition = new webkitSpeechRecognition();
+
+    recognition.lang = "en-US";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+
+    recognition.onstart = () => {
+      setIsListening(true);
+    };
+
+    recognition.onresult = (event) => {
+      const voiceText = event.results[0][0].transcript;
+
+      setArtistName(voiceText);
+      getSongs(voiceText);
+    };
+
+    recognition.onerror = () => {
+      setIsListening(false);
+    };
+
+    recognition.onend = () => {
+      setIsListening(false);
+    };
+
+    recognition.start();
+
+    recognitionRef.current = recognition;
+  };
 
   const getSongs = async (artist) => {
     try {
@@ -49,9 +94,9 @@ function App() {
         },
       });
 
-      // console.log(res); // full response
-      // console.log(res.data); // Only data
-      // console.log(res.data.results); //song array
+      // console.log(res);
+      // console.log(res.data);
+      // console.log(res.data.results);
 
       const results = res.data.results || [];
 
@@ -127,6 +172,15 @@ function App() {
             }}
           />
 
+          {/* Voice Icon (ADDED) */}
+          <i
+            className={`fa-solid fa-microphone voice-icon ${
+              artistName ? "with-clear" : ""
+            }`}
+            onClick={startVoiceSearch}
+            title="Voice Search"
+          ></i>
+
           {/* cross mark */}
           {artistName && (
             <i
@@ -147,6 +201,9 @@ function App() {
           Search
         </button>
       </div>
+
+      {/* Listening Indicator (ADDED) */}
+      {isListening && <p>🎤 Listening...</p>}
 
       {/* Artist Title */}
       {artistName && songs.length > 0 && (
@@ -176,7 +233,11 @@ function App() {
                   onClick={() => handlePlay(song.previewUrl, i)}
                   className="play-btn"
                 >
-                  {currentIndex === i ? "⏸" : "▶"}
+                  <i
+                    className={`fa-solid ${
+                      currentIndex === i ? "fa-pause" : "fa-play"
+                    }`}
+                  ></i>
                 </button>
               )}
             </div>
